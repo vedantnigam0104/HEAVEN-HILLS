@@ -23,7 +23,10 @@ mongoose
 const app = express();
 
 // Example: Allow requests from http://localhost:5173
-app.use(cors("*"));
+app.use(cors({
+  origin : 'https://heaven-hills-frontend.netlify.app/',
+  credentials: true,
+}));
 
 
 app.use(express.json());
