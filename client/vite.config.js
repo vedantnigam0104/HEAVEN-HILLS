@@ -7,7 +7,7 @@ export default defineConfig({
     port: 5173, // Set the port for the frontend server
     proxy: {
       '/api': {
-        target: 'http://localhost:3000',
+        target: 'https://heaven-hills',
         changeOrigin: true,
         //rewrite: (path) => path.replace(/^\/api/, ''),
         secure: false,
