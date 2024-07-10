@@ -52,7 +52,7 @@ export default function Search() {
       setLoading(true);
       setShowMore(false);
       const searchQuery = urlParams.toString();
-      const res = await fetch(`https://heaven-hills/api/listing/get?${searchQuery}`);
+      const res = await fetch(`https://heaven-hills-1.onrender.com/api/listing/get?${searchQuery}`);
       const data = await res.json();
       if (data.length > 8) {
         setShowMore(true);
