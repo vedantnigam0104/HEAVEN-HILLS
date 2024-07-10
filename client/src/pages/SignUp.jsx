@@ -21,7 +21,9 @@ export default function SignUp() {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
-        },
+          'Acess-Control-Allow-Origin':'*',
+        },  
+        withCreCredentials : true,
         body: JSON.stringify(formData),
       });
       const data = await res.json();
