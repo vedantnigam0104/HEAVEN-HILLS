@@ -116,21 +116,16 @@ export default function Profile() {
   const handleSignOut = async () => {
     try {
       dispatch(signOutUserStart());
-      //const token = localStorage.getItem('token');
-      const res = await fetch('https://heaven-hills.onrender.com/api/auth/signout', {
-        headers: {
-          //Authorization: `Bearer ${token}`,
-        },
-      });
+      const res = await fetch('https://heaven-hills.onrender.com/api/auth/signout');
       const data = await res.json();
-      if (!data.success) {
+      if (data.success === false) {
         dispatch(deleteUserFailure(data.message));
         return;
       }
       dispatch(deleteUserSuccess(data));
       navigate('/sign-in');
     } catch (error) {
-      dispatch(deleteUserFailure(error.message));
+      dispatch(deleteUserFailure(data.message));
     }
   };
 
