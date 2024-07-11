@@ -116,10 +116,10 @@ export default function Profile() {
   const handleSignOut = async () => {
     try {
       dispatch(signOutUserStart());
-      const token = localStorage.getItem('token');
+      //const token = localStorage.getItem('token');
       const res = await fetch('https://heaven-hills.onrender.com/api/auth/signout', {
         headers: {
-          Authorization: `Bearer ${token}`,
+          //Authorization: `Bearer ${token}`,
         },
       });
       const data = await res.json();
