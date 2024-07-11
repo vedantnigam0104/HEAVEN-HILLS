@@ -1,5 +1,5 @@
 import { useSelector } from 'react-redux';
-import { useRef, useState, useEffect} from 'react';
+import { useRef, useState, useEffect } from 'react';
 import {
   getDownloadURL,
   getStorage,
@@ -8,7 +8,7 @@ import {
 } from 'firebase/storage';
 import { app } from '../firebase';
 import { useDispatch } from 'react-redux';
-import { Link ,useNavigate} from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 import {
   updateUserStart,
   updateUserSuccess,
@@ -18,6 +18,7 @@ import {
   deleteUserSuccess,
   signOutUserStart,
 } from '../redux/user/userSlice';
+
 export default function Profile() {
   const fileRef = useRef(null);
   const { currentUser, loading, error } = useSelector((state) => state.user);
@@ -29,12 +30,7 @@ export default function Profile() {
   const [showListingsError, setShowListingsError] = useState(false);
   const [userListings, setUserListings] = useState([]);
   const dispatch = useDispatch();
-  const navigate=useNavigate();
-  // firebase storage
-  // allow read;
-  // allow write: if
-  // request.resource.size < 2 * 1024 * 1024 &&
-  // request.resource.contentType.matches('image/.*')
+  const navigate = useNavigate();
 
   useEffect(() => {
     if (file) {
@@ -51,8 +47,7 @@ export default function Profile() {
     uploadTask.on(
       'state_changed',
       (snapshot) => {
-        const progress =
-          (snapshot.bytesTransferred / snapshot.totalBytes) * 100;
+        const progress = (snapshot.bytesTransferred / snapshot.totalBytes) * 100;
         setFilePerc(Math.round(progress));
       },
       (error) => {
@@ -69,19 +64,22 @@ export default function Profile() {
   const handleChange = (e) => {
     setFormData({ ...formData, [e.target.id]: e.target.value });
   };
+
   const handleSubmit = async (e) => {
     e.preventDefault();
     try {
       dispatch(updateUserStart());
+      const token = localStorage.getItem('token');
       const res = await fetch(`https://heaven-hills.onrender.com/api/user/update/${currentUser._id}`, {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
+          Authorization: `Bearer ${token}`,
         },
         body: JSON.stringify(formData),
       });
       const data = await res.json();
-      if (data.success === false) {
+      if (!data.success) {
         dispatch(updateUserFailure(data.message));
         return;
       }
@@ -92,14 +90,19 @@ export default function Profile() {
       dispatch(updateUserFailure(error.message));
     }
   };
+
   const handleDeleteUser = async () => {
     try {
       dispatch(deleteUserStart());
+      const token = localStorage.getItem('token');
       const res = await fetch(`https://heaven-hills.onrender.com/api/user/delete/${currentUser._id}`, {
         method: 'DELETE',
+        headers: {
+          Authorization: `Bearer ${token}`,
+        },
       });
       const data = await res.json();
-      if (data.success === false) {
+      if (!data.success) {
         dispatch(deleteUserFailure(data.message));
         return;
       }
@@ -109,27 +112,39 @@ export default function Profile() {
       dispatch(deleteUserFailure(error.message));
     }
   };
+
   const handleSignOut = async () => {
     try {
       dispatch(signOutUserStart());
-      const res = await fetch('https://heaven-hills.onrender.com/api/auth/signout');
+      const token = localStorage.getItem('token');
+      const res = await fetch('https://heaven-hills.onrender.com/api/auth/signout', {
+        headers: {
+          Authorization: `Bearer ${token}`,
+        },
+      });
       const data = await res.json();
-      if (data.success === false) {
+      if (!data.success) {
         dispatch(deleteUserFailure(data.message));
         return;
       }
       dispatch(deleteUserSuccess(data));
       navigate('/sign-in');
     } catch (error) {
-      dispatch(deleteUserFailure(data.message));
+      dispatch(deleteUserFailure(error.message));
     }
   };
+
   const handleShowListings = async () => {
     try {
       setShowListingsError(false);
-      const res = await fetch(`https://heaven-hills-frontend.onrender.com/api/user/listings/${currentUser._id}`);
+      const token = localStorage.getItem('token');
+      const res = await fetch(`https://heaven-hills-frontend.onrender.com/api/user/listings/${currentUser._id}`, {
+        headers: {
+          Authorization: `Bearer ${token}`,
+        },
+      });
       const data = await res.json();
-      if (data.success === false) {
+      if (!data.success) {
         setShowListingsError(true);
         return;
       }
@@ -139,20 +154,23 @@ export default function Profile() {
       setShowListingsError(true);
     }
   };
+
   const handleListingDelete = async (listingId) => {
     try {
+      const token = localStorage.getItem('token');
       const res = await fetch(`https://heaven-hills-frontend.onrender.com/api/listing/delete/${listingId}`, {
         method: 'DELETE',
+        headers: {
+          Authorization: `Bearer ${token}`,
+        },
       });
       const data = await res.json();
-      if (data.success === false) {
+      if (!data.success) {
         console.log(data.message);
         return;
       }
 
-      setUserListings((prev) =>
-        prev.filter((listing) => listing._id !== listingId)
-      );
+      setUserListings((prev) => prev.filter((listing) => listing._id !== listingId));
     } catch (error) {
       console.log(error.message);
     }
