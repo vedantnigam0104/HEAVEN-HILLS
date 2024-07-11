@@ -116,7 +116,7 @@ export default function Profile() {
   const handleSignOut = async () => {
     try {
       dispatch(signOutUserStart());
-      const res = await fetch('https://heaven-hills.onrender.com/api/auth/signout');
+      const res = await fetch('https://heaven-hills-frontend.onrender.com/api/auth/signout');
       const data = await res.json();
       if (data.success === false) {
         dispatch(deleteUserFailure(data.message));
