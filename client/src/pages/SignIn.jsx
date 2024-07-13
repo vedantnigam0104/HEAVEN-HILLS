@@ -40,7 +40,7 @@ export default function SignIn() {
       }
 
       // Store token in localStorage
-      localStorage.setItem('token', data.token);
+      localStorage.setItem('access_token', data.token);
 
       dispatch(signInSuccess(data.user));
       navigate('/');
