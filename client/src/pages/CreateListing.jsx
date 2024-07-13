@@ -125,6 +125,7 @@ export default function CreateListing() {
 
 
   const handleSubmit = async (e) => {
+    const token = localStorage.getItem('access_token');
     e.preventDefault();
     try {
       if (formData.imageUrls.length < 1)
@@ -137,6 +138,7 @@ export default function CreateListing() {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
+          'Authorization': `Bearer ${token}`,
         },
         body: JSON.stringify({
           ...formData,
