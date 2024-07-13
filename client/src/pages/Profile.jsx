@@ -133,14 +133,15 @@ export default function Profile() {
 
   const handleShowListings = async () => {
     try {
-      console.log(currentUser._id);
+      // console.log(currentUser._id);
       setShowListingsError(false);
       const token = localStorage.getItem('access_token');
-      const res = await fetch(`https://heaven-hills.onrender.com/api/user/listings/${currentUser._id}`, {
+      const res = await fetch(`https://heaven-hills.onrender.com/api/listings/${currentUser._id}`, {
         headers: {
           'Authorization': `Bearer ${token}`,
         },
       });
+      console.log("Yes");
       const data = await res.json();
       if (!data.success) {
         setShowListingsError(true);
