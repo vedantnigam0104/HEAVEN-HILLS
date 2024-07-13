@@ -34,7 +34,8 @@ export default function SignIn() {
       });
       const data = await res.json();
       // console.log(data);
-      signInSuccess(data.message);
+      localStorage.setItem('access_token', data.token);
+      dispatch(signInSuccess(data));
       navigate('/');
       if (!data.success) {
         dispatch(signInFailure(data.message));
