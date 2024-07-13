@@ -69,7 +69,9 @@ export default function Profile() {
     e.preventDefault();
     try {
       dispatch(updateUserStart());
-      const token = localStorage.getItem('token');
+      const token = localStorage.getItem('access_token');
+      console.log("In update user");
+      console.log(token);
       const res = await fetch(`https://heaven-hills.onrender.com/api/user/update/${currentUser._id}`, {
         method: 'POST',
         headers: {
@@ -94,7 +96,7 @@ export default function Profile() {
   const handleDeleteUser = async () => {
     try {
       dispatch(deleteUserStart());
-      const token = localStorage.getItem('token');
+      const token = localStorage.getItem('access_token');
       const res = await fetch(`https://heaven-hills.onrender.com/api/user/delete/${currentUser._id}`, {
         method: 'DELETE',
         headers: {
@@ -132,7 +134,7 @@ export default function Profile() {
   const handleShowListings = async () => {
     try {
       setShowListingsError(false);
-      const token = localStorage.getItem('token');
+      const token = localStorage.getItem('access_token');
       const res = await fetch(`https://heaven-hills.onrender.com/api/user/listings/${currentUser._id}`, {
         headers: {
           'Authorization': `Bearer ${token}`,
@@ -152,7 +154,7 @@ export default function Profile() {
 
   const handleListingDelete = async (listingId) => {
     try {
-      const token = localStorage.getItem('token');
+      const token = localStorage.getItem('access_token');
       const res = await fetch(`https://heaven-hills-frontend.onrender.com/api/listing/delete/${listingId}`, {
         method: 'DELETE',
         headers: {
