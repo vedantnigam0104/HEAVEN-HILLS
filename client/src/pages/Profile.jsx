@@ -74,7 +74,7 @@ export default function Profile() {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
-          Authorization: `Bearer ${token}`,
+          'Authorization': `Bearer ${token}`,
         },
         body: JSON.stringify(formData),
       });
@@ -98,7 +98,7 @@ export default function Profile() {
       const res = await fetch(`https://heaven-hills.onrender.com/api/user/delete/${currentUser._id}`, {
         method: 'DELETE',
         headers: {
-          Authorization: `Bearer ${token}`,
+          'Authorization': `Bearer ${token}`,
         },
       });
       const data = await res.json();
@@ -116,7 +116,7 @@ export default function Profile() {
   const handleSignOut = async () => {
     try {
       dispatch(signOutUserStart());
-      const res = await fetch('https://heaven-hills-frontend.onrender.com/api/auth/signout');
+      const res = await fetch('https://heaven-hills.onrender.com/api/auth/signout');
       const data = await res.json();
       if (data.success === false) {
         dispatch(deleteUserFailure(data.message));
@@ -133,9 +133,9 @@ export default function Profile() {
     try {
       setShowListingsError(false);
       const token = localStorage.getItem('token');
-      const res = await fetch(`https://heaven-hills-frontend.onrender.com/api/user/listings/${currentUser._id}`, {
+      const res = await fetch(`https://heaven-hills.onrender.com/api/user/listings/${currentUser._id}`, {
         headers: {
-          Authorization: `Bearer ${token}`,
+          'Authorization': `Bearer ${token}`,
         },
       });
       const data = await res.json();
@@ -156,7 +156,7 @@ export default function Profile() {
       const res = await fetch(`https://heaven-hills-frontend.onrender.com/api/listing/delete/${listingId}`, {
         method: 'DELETE',
         headers: {
-          Authorization: `Bearer ${token}`,
+          'Authorization': `Bearer ${token}`,
         },
       });
       const data = await res.json();
