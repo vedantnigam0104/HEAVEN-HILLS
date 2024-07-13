@@ -70,8 +70,8 @@ export default function Profile() {
     try {
       dispatch(updateUserStart());
       const token = localStorage.getItem('access_token');
-      console.log("In update user");
-      console.log(token);
+      // console.log("In update user");
+      // console.log(token);
       const res = await fetch(`https://heaven-hills.onrender.com/api/user/update/${currentUser._id}`, {
         method: 'POST',
         headers: {
@@ -133,6 +133,7 @@ export default function Profile() {
 
   const handleShowListings = async () => {
     try {
+      console.log(currentUser._id);
       setShowListingsError(false);
       const token = localStorage.getItem('access_token');
       const res = await fetch(`https://heaven-hills.onrender.com/api/user/listings/${currentUser._id}`, {
@@ -145,7 +146,7 @@ export default function Profile() {
         setShowListingsError(true);
         return;
       }
-
+      console.log("Yes");
       setUserListings(data);
     } catch (error) {
       setShowListingsError(true);

@@ -48,6 +48,7 @@ export const updateListing = async (req, res, next) => {
   }
 };
 export const getListing = async (req, res, next) => {
+  res.status(200).json({message : "Success"});
   try {
     console.log("In listings");
     const listing = await Listing.findById(req.params.id);
