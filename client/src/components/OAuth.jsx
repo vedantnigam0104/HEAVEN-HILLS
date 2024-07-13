@@ -26,6 +26,7 @@ export default function OAuth() {
         }),
       });
       const data = await res.json();
+      console.log("Data in OAuth.jsx ",data);
       localStorage.setItem('access_token', data.token);
       dispatch(signInSuccess(data));
       navigate('/');
