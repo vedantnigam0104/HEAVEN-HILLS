@@ -25,7 +25,7 @@ const app = express();
 // Example: Allow requests from http://localhost:5173
 app.use(cors({
   origin : 'https://heaven-hills-frontend.onrender.com',
-  credentials: true,
+  // credentials: true,
 }));
 
 
