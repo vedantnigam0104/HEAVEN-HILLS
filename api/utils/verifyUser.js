@@ -17,8 +17,10 @@
 
 
 const jwt = require('jsonwebtoken');
+const dotenv = require('dotenv');
+dotenv.config();
 
-const verifyToken = (req, res, next) => {
+export const verifyToken = (req, res, next) => {
     const token = req.header('Authorization')?.replace('Bearer ', '');
 
     console.log("In validateUser");
@@ -38,5 +40,4 @@ const verifyToken = (req, res, next) => {
     }
 };
 
-
-module.exports = verifyToken;
+// module.exports = verifyToken
