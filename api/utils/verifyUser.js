@@ -18,7 +18,7 @@
 
 const jwt = require('jsonwebtoken');
 
-const verifyUser = (req, res, next) => {
+const verifyToken = (req, res, next) => {
     const token = req.header('Authorization')?.replace('Bearer ', '');
 
     console.log("In validateUser");
@@ -39,4 +39,4 @@ const verifyUser = (req, res, next) => {
 };
 
 
-module.exports = verifyUser;
+module.exports = verifyToken;
