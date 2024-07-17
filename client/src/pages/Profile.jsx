@@ -144,9 +144,10 @@ export default function Profile() {
           'Authorization': `Bearer ${token}`,
         },
       });
-      console.log(`res : ` , res.json());
-      console.log("Yes");
+      
       const data = await res.json();
+      console.log(`res : ` , data);
+      console.log("Yes");
       if (!data.success) {
         setShowListingsError(true);
         return;
