@@ -21,6 +21,8 @@ import dotenv from 'dotenv'
 dotenv.config();
 
 export const verifyToken = (req, res, next) => {
+
+    console.log("Token : " , req.header('Authorization'))
     const token = req.header('Authorization')?.replace('Bearer ', '');
 
     console.log("In validateUser");
