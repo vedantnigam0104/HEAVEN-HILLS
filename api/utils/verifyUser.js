@@ -17,6 +17,7 @@
 
 
 import jwt from 'jsonwebtoken';
+import { errorHandler } from './error.js';
 import dotenv from 'dotenv'
 dotenv.config();
 
