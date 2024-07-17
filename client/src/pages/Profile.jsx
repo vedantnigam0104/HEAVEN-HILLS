@@ -144,6 +144,7 @@ export default function Profile() {
           'Authorization': `Bearer ${token}`,
         },
       });
+      console.log(`res : ` , res);
       console.log("Yes");
       const data = await res.json();
       if (!data.success) {
