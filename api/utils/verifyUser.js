@@ -19,6 +19,7 @@ import bcryptjs from 'bcryptjs';
 import jwt from 'jsonwebtoken';
 import { errorHandler } from './error.js';
 import dotenv from 'dotenv'
+import User from '../models/user.model.js';
 dotenv.config();
 
 export const verifyToken = (req, res, next) => {
