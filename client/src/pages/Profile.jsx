@@ -139,6 +139,7 @@ export default function Profile() {
       setShowListingsError(false);
       const token = localStorage.getItem('access_token');
       const res = await fetch(`https://heaven-hills.onrender.com/api/user/listings/${currentUser._id}`, {
+        method: 'GET',
         headers: {
           'Authorization': `Bearer ${token}`,
         },
