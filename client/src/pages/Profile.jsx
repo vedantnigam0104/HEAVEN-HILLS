@@ -1,5 +1,6 @@
 import { useSelector } from 'react-redux';
 import { useRef, useState, useEffect } from 'react';
+// import toast from react-toast
 import {
   getDownloadURL,
   getStorage,
@@ -88,6 +89,7 @@ export default function Profile() {
 
       dispatch(updateUserSuccess(data));
       setUpdateSuccess(true);
+      // toast.success("User updated successfully");
     } catch (error) {
       dispatch(updateUserFailure(error.message));
     }

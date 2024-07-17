@@ -52,6 +52,7 @@ export const getListing = async (req, res, next) => {
   try {
     console.log("In listings");
     const listing = await Listing.findById(req.params.id);
+    console.log(req.params.id);
     if (!listing) {
       return next(errorHandler(404, 'Listing not found!'));
     }
