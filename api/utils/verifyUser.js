@@ -46,10 +46,10 @@ export const verifyToken = (req, res, next) => {
 
 export const updateUser = async (req, res, next) => {
     console.log("In update")
-    console.log(req.user.id);
+    console.log(req.user);
     console.log(req.params.id);
 
-    if (req.user.id !== req.params.id)
+    if (req.user !== req.params.id)
       return next(errorHandler(401, 'You can only update your own account!'));
     try {
       if (req.body.password) {
