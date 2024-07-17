@@ -148,7 +148,7 @@ export default function Profile() {
       const data = await res.json();
       console.log(`res : ` , data);
       console.log("Yes");
-      if (!data.success) {
+      if (!res.status == 200) {
         setShowListingsError(true);
         return;
       }
