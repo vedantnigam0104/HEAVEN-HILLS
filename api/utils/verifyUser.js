@@ -89,7 +89,7 @@ export const updateUser = async (req, res, next) => {
         
         const listings = await Listing.find({ userRef: req.params.id });
         console.log(`listing : `, listings);
-        res.status(200).json(listings);
+        res.status(200).json({data : listings});
       } catch (error) {
         next(error);
       }
