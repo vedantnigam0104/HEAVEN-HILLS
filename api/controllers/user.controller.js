@@ -9,7 +9,7 @@ export const test = (req, res) => {
   };
   export const updateUser = async (req, res, next) => {
     console.log("In update")
-    if (req.user._id !== req.params.id)
+    if (req.user.id !== req.params.id)
       return next(errorHandler(401, 'You can only update your own account!'));
     try {
       if (req.body.password) {
